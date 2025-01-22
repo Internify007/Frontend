@@ -1,0 +1,44 @@
+.CookieConsent {
+  background-color: transparent !important;
+  border-radius: 2em !important;
+  position: fixed !important;
+  transform: scale(0.75) !important;
+}
+
+.btn-cookie-consent {
+  display: inline-block !important;
+  border-radius: 0.5rem !important;
+  text-align: center !important;
+  transition: background-color 0.3s var(--03), color 0.3s var(--03) !important;
+  width: 110px !important;
+  height: 37px !important;
+  padding: 0 !important;
+}
+
+.btn-cookie-consent-accept {
+  background-color: var(--red-primary) !important;
+  color: var(--white-primary) !important;
+}
+
+.btn-cookie-consent-accept:hover {
+  color: var(--white-primary) !important;
+  background-color: var(--gray-primary) !important;
+}
+
+.btn-quaternary-cookie-consent {
+  border: 1px solid white !important;
+  border-color: var(--gray-primary) !important;
+  color: var(--gray-primary) !important;
+  background-color: transparent !important;
+}
+
+.btn-cookie-consent-decline {
+  border-color: var(--red-primary) !important;
+  color: var(--red-primary) !important;
+  margin: 0 !important;
+}
+
+.btn-cookie-consent-decline:hover {
+  background-color: var(--red-primary) !important;
+  color: var(--white-primary) !important;
+}
