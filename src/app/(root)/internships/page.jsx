@@ -1,53 +1,23 @@
 'use client'
 
 import Link from 'next/link'
-import { useState } from 'react'
+import { useState, useEffect} from 'react'
 
 export default function InternshipsPage() {
-  const [internships] = useState([
-    {
-      id: 1,
-      title: 'Software Development Intern',
-      company: 'TechCorp',
-      logo: '/companies/techcorp.png',
-      location: 'San Francisco, CA',
-      type: 'Full-time',
-      duration: '6 months',
-      stipend: '$3000/month',
-      posted: '2 days ago',
-      skills: ['React', 'Node.js', 'TypeScript'],
-      applicants: 75,
-      deadline: '2024-01-31'
-    },
-    {
-      id: 2,
-      title: 'Data Science Intern',
-      company: 'DataMinds AI',
-      logo: '/companies/dataminds.png',
-      location: 'Remote',
-      type: 'Full-time',
-      duration: '3 months',
-      stipend: '$2500/month',
-      posted: '1 week ago',
-      skills: ['Python', 'Machine Learning', 'SQL'],
-      applicants: 120,
-      deadline: '2024-02-15'
-    },
-    {
-      id: 3,
-      title: 'UX/UI Design Intern',
-      company: 'DesignHub',
-      logo: '/companies/designhub.png',
-      location: 'New York, NY',
-      type: 'Part-time',
-      duration: '4 months',
-      stipend: '$2000/month',
-      posted: '3 days ago',
-      skills: ['Figma', 'Adobe XD', 'Prototyping'],
-      applicants: 45,
-      deadline: '2024-02-10'
+  const [internships,setInternships] = useState([]);
+  useEffect( ()=>{
+    const fetchData = async()=>{
+     try{
+      const response = await fetch("http://localhost:8081/api/jobs");
+      const data =await response.json();
+      console.log("Data:- ",data);
+      setInternships(data);
+     }catch(error){
+      console.log("Error:- ",error);
+     }
     }
-  ])
+    fetchData();
+  },[])
 
   return (
     <main className="min-h-screen bg-gray-50">
@@ -86,7 +56,7 @@ export default function InternshipsPage() {
 
       {/* Internships List */}
       <section className="container mx-auto px-4 py-16">
-        <div className="space-y-6">
+      <div className="space-y-6">
           {internships.map((internship) => (
             <Link
               key={internship.id}
@@ -96,11 +66,11 @@ export default function InternshipsPage() {
               <div className="flex flex-col gap-6 md:flex-row md:items-center md:justify-between">
                 <div className="flex items-start space-x-4">
                   <div className="h-16 w-16 flex-shrink-0 overflow-hidden rounded-lg bg-gray-100">
-                    <img
+                    {/* <img
                       src={internship.logo}
                       alt={internship.company}
                       className="h-full w-full object-cover"
-                    />
+                    /> */}
                   </div>
                   <div>
                     <h2 className="text-xl font-semibold text-gray-900">
@@ -119,25 +89,25 @@ export default function InternshipsPage() {
                         <svg className="mr-1.5 h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
                         </svg>
-                        {internship.duration}
+                        {internship.description}
                       </span>
                       <span className="flex items-center text-sm text-gray-500">
                         <svg className="mr-1.5 h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                         </svg>
-                        {internship.stipend}
+                        {internship.salary}
                       </span>
                     </div>
                   </div>
                 </div>
                 <div className="flex flex-col items-end gap-2">
-                  <span className={`rounded-full px-3 py-1 text-sm ${
+                  {/* <span className={`rounded-full px-3 py-1 text-sm ${
                     internship.type === 'Full-time' 
                       ? 'bg-green-100 text-green-800'
                       : 'bg-blue-100 text-blue-800'
                   }`}>
                     {internship.type}
-                  </span>
+                  </span> */}
                   <div className="flex flex-wrap gap-2">
                     {internship.skills.map((skill, index) => (
                       <span
@@ -149,7 +119,7 @@ export default function InternshipsPage() {
                     ))}
                   </div>
                   <div className="mt-2 text-sm text-gray-500">
-                    Posted {internship.posted} • {internship.applicants} applicants
+                    Posted {internship.posted}
                   </div>
                 </div>
               </div>
