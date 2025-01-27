@@ -109,7 +109,7 @@ export default function InternshipsPage() {
                     {internship.type}
                   </span> */}
                   <div className="flex flex-wrap gap-2">
-                    {internship.skills.map((skill, index) => (
+                    {internship.skills && internship.skills.map((skill, index) => (
                       <span
                         key={index}
                         className="rounded-full bg-gray-100 px-3 py-1 text-xs text-gray-600"
